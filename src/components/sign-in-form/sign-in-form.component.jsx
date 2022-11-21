@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
-import { getRedirectResult } from 'firebase/auth'
+import { useState } from 'react';
+// import { getRedirectResult } from 'firebase/auth'
 import FormInput from '../../components/form-input/form-input.component.jsx'
 import Button from '../../components/button/button.component.jsx'
+
+// import {UserContext} from '../../contexts/user.context'
+
 import './sign-in-form.styles.scss'
-import { auth, 
+import { 
 signInWithGooglePopup, 
-signInWithGoogleRedirect, 
-createUserDocumentFromAuth,
+// signInWithGoogleRedirect, 
+// createUserDocumentFromAuth,
 signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
 
 
@@ -25,34 +28,37 @@ const SignInForm = () => {
 	const {  email, password } = formFields;
 	// console.log(formFields);
 
+	// const { setCurrentUser } = useContext(UserContext);
+
 	const resetFormFields = () => {
 		setFormFields(DefaultformFields)
 	}
 	const signInWithGoogle =  async() => {
-		const {user} = await signInWithGooglePopup();
+		await signInWithGooglePopup();
 		
-		const userDocRef = await createUserDocumentFromAuth(user);
+		// const userDocRef = await createUserDocumentFromAuth(user);
 	}
-	const signInWithGoogleRedirect = useEffect(() => {
-	  async function fetchData() {
-	    // You can await here
-	    const response = await getRedirectResult(auth);
-	    console.log(response);	  
-	    if(response) {
-	    	const userDocRef = await createUserDocumentFromAuth(response.user);
+	// const signInWithGoogleRedirect = useEffect(() => {
+	//   async function fetchData() {
+	//     // You can await here
+	//     const response = await getRedirectResult(auth);
+	//     console.log(response);	  
+	//     if(response) {
+	//     	const userDocRef = await createUserDocumentFromAuth(response.user);
 
-	    }
+	//     }
 
-	}
-	  fetchData();
-	}, [])
+	// }
+	//   fetchData();
+	// }, [])
 
 	const handleSubmit = async(event)=> {
 		event.preventDefault();
 		//confirm pw match
 		try {
-			const response = await signInAuthUserWithEmailAndPassword(email,password);
-			console.log(response);
+		 await signInAuthUserWithEmailAndPassword(email,password);
+			// setCurrentUser(user);
+			// console.log(user);
 			resetFormFields();
 
 		}catch (error) {
@@ -96,7 +102,7 @@ const SignInForm = () => {
 				<div className="buttons-container">
 					<Button type="submit" children="Sign In"/>
 					<Button type='button' onClick={signInWithGoogle} buttonType="google"children="Sign In with Google Pop Up" />
-					<Button type='button' onClick={signInWithGoogleRedirect} buttonType="google"children="Sign In with Google Re-Direct" />
+					{/*<Button type='button' onClick={signInWithGoogleRedirect} buttonType="google"children="Sign In with Google Re-Direct" />*/}
 				</div>
 				
 
