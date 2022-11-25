@@ -58,7 +58,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [removeItem, itemRemoved] = useState([]);
+  // const [removeItem, itemRemoved] = useState([]);
 
   useEffect(()=> {
   	const newCardCount = cartItems.reduce((total, cartItem)=>{

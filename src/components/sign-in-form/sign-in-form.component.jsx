@@ -1,7 +1,7 @@
 import { useState } from 'react';
 // import { getRedirectResult } from 'firebase/auth'
 import FormInput from '../../components/form-input/form-input.component.jsx'
-import Button from '../../components/button/button.component.jsx'
+import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component.jsx'
 
 // import {UserContext} from '../../contexts/user.context'
 
@@ -101,7 +101,7 @@ const SignInForm = () => {
 				<FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password}  />
 				<div className="buttons-container">
 					<Button type="submit" children="Sign In"/>
-					<Button type='button' onClick={signInWithGoogle} buttonType="google"children="Sign In with Google Pop Up" />
+					<Button type='button' onClick={signInWithGoogle} buttonType={BUTTON_TYPE_CLASSES.google} children="Sign In with Google Pop Up" />
 					{/*<Button type='button' onClick={signInWithGoogleRedirect} buttonType="google"children="Sign In with Google Re-Direct" />*/}
 				</div>
 				
