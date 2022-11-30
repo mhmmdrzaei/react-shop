@@ -57,14 +57,20 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
 
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot)=>{
-    const { title, items} = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
+  return querySnapshot.docs.map((docSnapShot) => docSnapShot.data());
 
-    return acc;
-  },{});
 
-  return categoryMap;
+
+//this was the way with context, now we switch to redux
+    // const categoryMap = querySnapshot.docs
+  // .reduce((acc, docSnapshot)=>{
+  //   const { title, items} = docSnapshot.data();
+  //   acc[title.toLowerCase()] = items;
+
+  //   return acc;
+  // },{});
+
+  // return categoryMap;
 
 }
 
